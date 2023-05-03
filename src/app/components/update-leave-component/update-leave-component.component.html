@@ -1,0 +1,63 @@
+<div class="container mt-5">
+    <h2>Update leave days</h2>
+    <!-- <span>After update your dashboard will update once your manager approves the request</span> -->
+
+
+    <ng-container *ngIf="leaveForm && leaveForm != null">
+        <form [formGroup]="leaveForm" class=" m-2 mt-3">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="employeeNameField" class="form-label">Employee name</label>
+                    <input formControlName="name" name="employeeName" type="text" id="employeeNameField"
+                        class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="departmentField" class="form-label">Department</label>
+                    <input formControlName="department" name="department" type="text" id="departmentField"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="emailField" class="form-label">E-mail</label>
+                    <input formControlName="email" name="email" type="email" id="emailField" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="baseLocationField" class="form-label">Base location</label>
+                    <input formControlName="baseLocation" name="city" type="text" id="baseLocationField"
+                        class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="leaveDaysField" class="form-label">Leave Days</label>
+                    <input formControlName="leaves" name="leaveDays" type="number" id="leaveDaysField"
+                        class="form-control" min="1">
+                </div>
+                <div class="col-md-6" *ngIf="showNewLeaveDays">
+                    <label for="newLeaveDaysField" class="form-label">Requested Leave Days</label>
+                    <input formControlName="newLeaveDays" name="newLeaveDays" type="number" id="newLeaveDaysField"
+                        class="form-control" min="1">
+                </div>
+            </div>
+            <div class="col-md-6 align-text-bottom mt-sm-3 mt-md-1">
+                <button class="btn btn-primary" (click)="raiseRequestForLeaveDays()">Raise request</button>
+            </div>
+        </form>
+    </ng-container>
+
+</div>
+<h6>Note</h6>
+<ol class="list">
+    <li>
+        An update request can be raised only for leave days.
+    </li>
+    <li>
+        Status will change from "NA" to "In Progress" once a request has been raised.
+    </li>
+    <li>Updated value for leaves day will be visible after successful approval from a manager, the status will be
+        changed to "Completed."
+    </li>
+</ol>

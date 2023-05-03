@@ -1,0 +1,43 @@
+<h2>Leave tracker and update</h2>
+<span class="text">Manage and update user leave days</span>
+
+<table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Department</th>
+            <th>Email</th>
+
+            <th>Base Location</th>
+            <th>Leave Days</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngIf="sampleData.length">
+            <tr *ngFor="let data of sampleData">
+                <td>{{data?.name}}</td>
+                <td> {{data?.department}}</td>
+                <td>{{data?.email}}</td>
+                <td>{{data?.baseLocation}}</td>
+                <td>{{data?.leaves}}</td>
+                <td>{{(data?.leaveRequest?.status | titlecase) || 'NA'}}</td>
+                <td><a class="link" [routerLink]="'/update-leave'" [queryParams]="{id : data.id}" (click)="broadcastMe(data)">View/Update</a></td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<h6>Note</h6>
+<ol class="list">
+    <li>
+        An update request can be raised only for leave days.
+    </li>
+    <li>
+        Status will change from "NA" to "In Progress" once a request has been raised.
+    </li>
+    <li>Updated value for leaves day will be visible after successful approval from a manager, the status will be changed to "Completed."
+    </li>
+</ol>
+<!-- <p>example-two works!</p> -->

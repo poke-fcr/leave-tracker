@@ -1,0 +1,58 @@
+<h2>Manager Leave tracker</h2>
+<span class="text">Manage leave update requests</span>
+<ng-container *ngIf="!userData.length">
+<div class="container my-5 text-center">
+    <h3>No request found.</h3>
+</div>
+</ng-container>
+
+<ng-container *ngIf="userData.length">
+    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Department</th>
+                <th>Email</th>
+               
+                <th>Base Location</th>
+                <th>Leave Days</th>
+                <th>Requested Leave Days</th>
+
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container>
+                <tr *ngFor="let data of userData">
+                    <td>{{data?.name}}</td>
+                    <td> {{data?.department}}</td>
+                    <td>{{data?.email}}</td>
+                    
+                    <td>{{data?.baseLocation}}</td>
+                    <td>{{data?.leaves}}</td>
+                    <td>{{data?.leaveRequest?.leaves_requested}}</td>
+                    <td><a (click)="acceptRequest(data)" class="mr-2  text-success" style="cursor: pointer !important;">Accept</a>&nbsp;&nbsp;<a
+                            (click)="rejectRequest(data)" class=" text-danger link" style="cursor: pointer !important;">Reject</a></td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+</ng-container>
+
+<ngb-toast
+[autohide]="true"
+[delay]="3000"
+(hidden)="showToast = false"
+[header]="messageHeader" *ngIf="showToast">
+    <!-- Content here -->{{messageContent}}
+</ngb-toast>
+
+
+<!-- <h6>Note</h6>
+<ol>
+    <li>You can rause an update request for leave days.</li>
+    <li>Updated record will only be shown after your has accepted your update request.</li>
+</ol> -->
+<!-- <p>example-two works!</p> -->
